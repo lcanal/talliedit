@@ -18,7 +18,9 @@
         <%= button_to 'Sign out', auth.sign_out_path, method: :delete, form: { data: { turbo_confirm: 'Log out?' } } %>
 
     <% else %>
-        <%= link_to 'Sign in', auth.sign_in_path %>
+        <div>
+          <%= link_to 'Sign in', auth.sign_in_path %>
+        </div>
       <% end %>
 
       <%= yield %>
