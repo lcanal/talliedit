@@ -13,6 +13,14 @@
 
   <body>
     <main class="container mx-auto mt-28 px-5 flex">
+      <% if current_user %>
+        <%= current_user.email %>
+        <%= button_to 'Sign out', auth.sign_out_path, method: :delete, form: { data: { turbo_confirm: 'Log out?' } } %>
+
+    <% else %>
+        <%= link_to 'Sign in', auth.sign_in_path %>
+      <% end %>
+
       <%= yield %>
     </main>
   </body>

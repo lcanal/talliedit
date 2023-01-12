@@ -1,5 +1,8 @@
 class CategoriesController < ApplicationController
+  before_action :require_user!, only: %i[ edit update destroy increment ]
   before_action :set_category, only: %i[ show edit update destroy increment ]
+  skip_before_action :require_user!, only: %i[index show]
+  # before_action :require_user!
 
   # GET /categories or /categories.json
   def index
