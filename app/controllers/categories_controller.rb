@@ -25,8 +25,8 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to category_url(@category), notice: "Category was successfully created." }
-        format.json { render :show, status: :created, location: @category }
+        format.html { redirect_to categories_path, notice: "Category was successfully created." }
+        format.json { render :show, status: :created, location: categories_path }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @category.errors, status: :unprocessable_entity }
@@ -38,8 +38,8 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to category_url(@category), notice: "Category was successfully updated." }
-        format.json { render :show, status: :ok, location: @category }
+        format.html { redirect_to categories_path, notice: "Category was successfully updated." }
+        format.json { render :show, status: :ok, location: categories_path }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @category.errors, status: :unprocessable_entity }
@@ -48,9 +48,10 @@ class CategoriesController < ApplicationController
   end
 
   def increment
-    @category.count += 1
+    tally = Tally.new(category_id: @category.id)
+
     respond_to do |format|
-      if @category.save
+      if tally.save
         format.html { redirect_to categories_path, notice: "Incremented '#{@category.name}'" }
         format.json { render :show, status: :ok, location: categories_path }
       else
@@ -78,6 +79,6 @@ class CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.require(:category).permit(:name, :count)
+      params.require(:category).permit(:name)
     end
 end
