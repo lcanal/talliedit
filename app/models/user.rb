@@ -12,4 +12,10 @@ class User < ApplicationRecord
     find_or_create_by(email:)
   end
 
+  def gravatar_url
+    require 'digest/md5'
+    email_md5 = Digest::MD5.hexdigest(email)
+    "https://gravatar.com/avatar/#{email_md5}"
+  end
+
 end

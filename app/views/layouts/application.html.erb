@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full bg-gray-100">
   <head>
     <title>TalliedIt</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -11,19 +11,17 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="h-full">
       <% if current_user %>
+        <%= render 'layouts/shell' %>
         <%= current_user.email %>
         <%= button_to 'Sign out', auth.sign_out_path, method: :delete, form: { data: { turbo_confirm: 'Log out?' } } %>
 
     <% else %>
+        <%= render 'layouts/noshell' %>
         <div>
           <%= link_to 'Sign in', auth.sign_in_path %>
         </div>
       <% end %>
-
-      <%= yield %>
-    </main>
   </body>
 </html>
