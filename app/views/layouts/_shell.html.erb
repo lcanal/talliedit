@@ -142,7 +142,9 @@
               </div>
               <div class="ml-3">
                 <p class="text-base font-medium text-white"><%= current_user.email %></p>
-                <p class="text-sm font-medium text-gray-400 group-hover:text-gray-300">View profile</p>
+                <p class="text-sm font-medium text-gray-400 group-hover:text-gray-300">
+                  <%= link_to "Logout", auth.sign_out_path, class: "text-xs font-medium text-gray-300 group-hover:text-gray-200" %>
+                </p>
               </div>
             </div>
           </a>
@@ -219,17 +221,17 @@
         </nav>
       </div>
       <div class="flex flex-shrink-0 bg-gray-700 p-4">
-        <a href="#" class="group block w-full flex-shrink-0">
-          <div class="flex items-center">
+        <%= button_to auth.sign_out_path, method: :delete, form: { data: { turbo_confirm: 'Log out?' }, class: "group block w-full flex-shrink-0"} do %>
+         <div class="flex items-center">
             <div>
               <%= image_tag current_user.gravatar_url, class: "inline-block h-9 w-9 rounded-full" %>
             </div>
             <div class="ml-3">
               <p class="text-sm font-medium text-white"><%= current_user.email %></p>
-              <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</p>
+              <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">Logout</p>
             </div>
           </div>
-        </a>
+        <% end %>
       </div>
     </div>
   </div>

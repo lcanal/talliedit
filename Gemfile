@@ -75,3 +75,5 @@ group :test do
 end
 
 gem "passwordless", "~> 0.11.0"
+
+gem "dotenv-rails", "~> 2.8"
