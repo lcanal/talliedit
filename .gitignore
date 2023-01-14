@@ -35,3 +35,5 @@
 
 # IDE files
 .idea
+
+.env
