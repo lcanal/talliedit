@@ -4,5 +4,6 @@ class PagesController < ApplicationController
   end
 
   def sign_up
+    @email_field = :email
   end
 end
