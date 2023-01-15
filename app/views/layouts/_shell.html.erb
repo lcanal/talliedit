@@ -81,7 +81,7 @@
           </div>
           <nav class="mt-5 space-y-1 px-2">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="#" class="bg-gray-900 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
+            <%= link_to categories_path, class: "bg-gray-900 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md" do %>
               <!--
                 Heroicon name: outline/square-3-stack-3d
                 Current: "text-gray-300", Default: "text-gray-400 group-hover:text-gray-300"
@@ -90,7 +90,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" />
               </svg>
               Categories
-            </a>
+            <% end %>
 
             <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
               <!-- Heroicon name: outline/users -->
@@ -141,7 +141,7 @@
         </div>
         <nav class="mt-5 flex-1 space-y-1 px-2">
           <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-          <a href="#" class="bg-gray-900 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+            <%= link_to categories_path, class: "bg-gray-900 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md" do %>
             <!--
               Heroicon name: outline/square-3-stack-3d
               Current: "text-gray-300", Default: "text-gray-400 group-hover:text-gray-300"
@@ -150,7 +150,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" />
             </svg>
             Categories
-          </a>
+          <% end %>
 
           <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
             <!-- Heroicon name: outline/users -->
