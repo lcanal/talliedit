@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :require_user!
-  before_action :set_category, only: %i[ show edit update destroy increment ]
+  before_action :set_category, only: %i[ show edit update destroy increment decrement ]
 
   # GET /categories or /categories.json
   def index
@@ -61,6 +61,20 @@ class CategoriesController < ApplicationController
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def decrement
+    last_tally = @category.tallies.last
+    respond_to do |format|
+      if !last_tally.nil? and last_tally.destroy
+        format.html { redirect_to categories_path, notice: "Decremented tally from '#{@category.name}'" }
+        format.json { render :show, status: :ok, location: categories_path }
+      else
+        format.html { redirect_to categories_path, status: :unprocessable_entity }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
 
   # DELETE /categories/1 or /categories/1.json
