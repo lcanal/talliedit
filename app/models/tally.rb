@@ -1,6 +1,7 @@
 class Tally < ApplicationRecord
   belongs_to :category
 
+
   def last_updated_local
     created_at + Time.zone_offset('PST')
   end
