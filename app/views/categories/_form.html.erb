@@ -60,7 +60,7 @@
                 </tr>
                 </thead>
                 <tbody class="bg-white">
-                <% @category.tallies.order(updated_at: :desc).each do |tally| %>
+                <% @category.tallies.order(updated_at: :desc).limit(15).each do |tally| %>
                   <tr>
                     <td class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
                       <%= link_to tally.last_updated_formatted, tally, class: "text-cyan-600 hover:text-cyan-900" %>
