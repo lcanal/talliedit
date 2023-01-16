@@ -17,13 +17,13 @@
         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
           <dt class="text-sm font-medium text-gray-500">Tally Note</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-            <%= form.text_field :notes, placeholder: "Add your note", class: "block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+            <%= form.text_field :notes, placeholder: "Add your note", class: "block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm" %>
           </dd>
         </div>
-        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Created by</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @tally.category.user_id %></dd>
-        </div>
+<!--        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">-->
+<!--          <dt class="text-sm font-medium text-gray-500">Created by</dt>-->
+<!--          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%#= @tally.category.user_id %></dd>-->
+<!--        </div>-->
       </dl>
     </div>
   </div>
