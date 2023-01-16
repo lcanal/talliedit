@@ -3,7 +3,7 @@ class Tally < ApplicationRecord
 
 
   def last_updated_local
-    created_at + Time.zone_offset('PST')
+    updated_at + Time.zone_offset('PST')
   end
 
   def last_updated_formatted
