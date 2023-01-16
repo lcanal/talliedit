@@ -1,6 +1,10 @@
 class TalliesController < ApplicationController
   before_action :set_tally, only: %i[ show edit update destroy increment ]
 
+  def show
+  end
+  def edit
+  end
   # DELETE /tallies/1 or /tallies/1.json
   def destroy
     parent_cat = @tally.category_id
@@ -12,6 +16,18 @@ class TalliesController < ApplicationController
     end
   end
 
+  def update
+    respond_to do |format|
+      if @tally.update(tally_params)
+        format.html { redirect_to edit_category_path(@tally.category), notice: "Note was successfully added." }
+        format.json { render :show, status: :ok, location: categories_path }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @tally.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def set_tally
@@ -19,7 +35,7 @@ class TalliesController < ApplicationController
   end
 
   # Only allow a list of trusted parameters through.
-  def category_params
-    params.require(:tally).permit(:id)
+  def tally_params
+    params.require(:tally).permit(:id,:notes)
   end
 end
