@@ -15,7 +15,7 @@ class User < ApplicationRecord
     user = find_or_create_by(email:)
     if user.teams.count == 0
       default_team = Team.create!(name: "My Team")
-      Membership.create!(team: default_team, user: user)
+      Membership.create!(team: default_team, user: user, role: 'owner')
     end
     user
   end

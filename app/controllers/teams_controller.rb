@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
 
   # GET /teams or /teams.json
   def index
-    @teams = Team.all
+    @teams = current_user.teams
   end
 
   # GET /teams/1 or /teams/1.json
@@ -22,10 +22,10 @@ class TeamsController < ApplicationController
   # POST /teams or /teams.json
   def create
     @team = Team.new(team_params)
-
+    @membership = Membership.new(user: current_user, team: @team, role: 'owner')
     respond_to do |format|
-      if @team.save
-        format.html { redirect_to team_url(@team), notice: "Team was successfully created." }
+      if @team.save and @membership.save
+        format.html { redirect_to teams_path, notice: "Team was successfully created." }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new, status: :unprocessable_entity }
