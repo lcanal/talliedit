@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :categories, :dependent => :destroy
+  has_many :memberships
+  has_many :teams, through: :memberships
 
   validates :email,
             presence: true,
@@ -8,10 +9,15 @@ class User < ApplicationRecord
 
   passwordless_with :email
 
-  # add this so that users can be created!
+  # Add this so that users can be created!
   # don't add this if you want your app to be invite-only
   def self.fetch_resource_for_passwordless(email)
-    find_or_create_by(email:)
+    user = find_or_create_by(email:)
+    if user.teams.count == 0
+      default_team = Team.create!(name: "My Team")
+      Membership.create!(team: default_team, user: user)
+    end
+    user
   end
 
   def gravatar_url

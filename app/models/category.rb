@@ -12,4 +12,8 @@ class Category < ApplicationRecord
     end
     "No tallies yet"
   end
+
+  def team_name
+    Team.find(team_id).name
+  end
 end

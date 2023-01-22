@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :teams
   passwordless_for :users , at: '/', as: :auth
   get '/sign_up', :to => "pages#sign_up", :as => :sign_up
 
