@@ -14,12 +14,58 @@
 <!--  </div>-->
 <!--</div>-->
 
-<div class="mx-auto md:w-2/3 w-full flex">
-  <%= link_to 'Edit this Team', edit_category_path(@team), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  <div class="inline-block ml-2">
-    <%= button_to 'Delete this Team', category_path(@team), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-  </div>
+<!--<div class="mx-auto md:w-2/3 w-full flex">-->
+<!--  <div class="mx-auto">-->
+    <%# if notice.present? %>
+<!--      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%#= notice %></p>-->
+    <%# end %>
 
-  <%= link_to 'Back to Teams', teams_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%#= render @team %>
+
+    <%#= link_to 'Edit this team', edit_team_path(@team), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+<!--    <div class="inline-block ml-2">-->
+      <%#= button_to 'Destroy this team', team_path(@team), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+<!--    </div>-->
+    <%#= link_to 'Back to teams', teams_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+<!--  </div>-->
+<!--</div>-->
+
+<% content_for :title  do %>
+  <div class="flex justify-between align-middle text-base mb-5">
+  <span class="text-4xl">
+    <%= @team.name %>
+  </span>
+    <%= link_to 'Edit Team', edit_team_path(@team), class: "rounded-lg py-3 px-5 bg-cyan-600 text-white block font-medium" %>
+  </div>
+<% end %>
+
+<div class="px-4 py-5 sm:px-6">
+  <h3 class="text-lg font-medium leading-6 text-gray-900">Basic Info</h3>
 </div>
+
+<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+  <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+    <dl class="sm:divide-y sm:divide-gray-200">
+      <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Owner</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @team.owner.email %></dd>
+      </div>
+      <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Created</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @team.created_at_formatted %></dd>
+      </div>
+      <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Number of Members</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"><%= @team.memberships.count %></dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="mt-5">
+  <div class="flex justify-between align-middle text-base mb-5 ml-6">
+    <h3 class="text-lg font-medium text-gray-900 mt-3">Members</h3>
+    <%= link_to 'Add members', edit_team_path(@team), class: "inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+  </div>
+  <%= render 'teams/members' %>
 </div>
