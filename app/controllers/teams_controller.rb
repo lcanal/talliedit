@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: %i[ show edit update destroy ]
+  before_action :set_team, only: %i[ show edit update destroy invite send_invite]
 
   # GET /teams or /teams.json
   def index
@@ -8,6 +8,22 @@ class TeamsController < ApplicationController
 
   # GET /teams/1 or /teams/1.json
   def show
+  end
+
+  def invite
+  end
+  def send_invite
+    user = User.fetch_resource_for_passwordless(params[:email])
+    membership = Membership.new(team: @team, user: user, role: 'pending')
+    respond_to do |format|
+      if membership.save and user.save
+        format.html { redirect_to teams_path, notice: "Invite was successfully sent." }
+        format.json { render :show, status: :created, location: teams_path }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # GET /teams/new
@@ -65,6 +81,6 @@ class TeamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def team_params
-      params.require(:team).permit(:name)
+      params.require(:team).permit(:name,:email)
     end
 end

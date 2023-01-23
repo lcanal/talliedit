@@ -17,6 +17,11 @@ class User < ApplicationRecord
       default_team = Team.create!(name: "My Team")
       Membership.create!(team: default_team, user: user, role: 'owner')
     end
+    if user.memberships.where(role: 'pending').count > 0
+      user.memberships.where(role: 'pending').each do |membership|
+        membership.update(role: 'member')
+      end
+    end
     user
   end
 
@@ -24,6 +29,11 @@ class User < ApplicationRecord
     require 'digest/md5'
     email_md5 = Digest::MD5.hexdigest(email)
     "https://gravatar.com/avatar/#{email_md5}"
+  end
+
+  private
+  def pending_memberships
+    memberships.where(role: 'pending').map(&:team)
   end
 
 end
