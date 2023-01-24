@@ -7,6 +7,18 @@
   </div>
 <% end %>
 
+<!-- Pending Memberships -->
+<% if @pending_memberships.count > 0 %>
+  <div class="border-b border-gray-200 pb-5">
+    <h3 class="text-lg font-medium leading-6 text-gray-900">Pending Team Invitations</h3>
+  </div>
+  <%= render 'pending_memberships' %>
+<% end %>
+
+<div class="border-b border-gray-200 pb-5 mb-7">
+  <h3 class="text-lg font-medium leading-6 text-gray-900">Your Teams</h3>
+</div>
+
 <div class="overflow-hidden bg-white shadow sm:rounded-md">
   <ul role="list" class="divide-y divide-gray-200">
     <%= render @teams %>

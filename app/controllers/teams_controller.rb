@@ -4,6 +4,7 @@ class TeamsController < ApplicationController
   # GET /teams or /teams.json
   def index
     @teams = current_user.teams
+    @pending_memberships = current_user.pending_memberships
   end
 
   # GET /teams/1 or /teams/1.json
@@ -13,16 +14,24 @@ class TeamsController < ApplicationController
   def invite
   end
   def send_invite
-    user = User.fetch_resource_for_passwordless(params[:email])
-    membership = Membership.new(team: @team, user: user, role: 'pending')
+    user = User.find_by_email(params[:email])
+    if user.nil?
+      user = User.fetch_resource_for_passwordless(params[:email])
+      membership = Membership.new(team: @team, user: user, role: 'pending')
+      membership.save
+      user.save
+    else
+      membership = Membership.new(team: @team, user: user, role: 'pending')
+      membership.save
+    end
     respond_to do |format|
-      if membership.save and user.save
+        UserMailer.with(user: user, team: @team, inviter: current_user).invite_email.deliver_now
         format.html { redirect_to teams_path, notice: "Invite was successfully sent." }
         format.json { render :show, status: :created, location: teams_path }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
-      end
+      # else
+      #   format.html { render :new, status: :unprocessable_entity }
+      #   format.json { render json: @team.errors, status: :unprocessable_entity }
+      # end
     end
   end
 

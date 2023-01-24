@@ -18,7 +18,7 @@ class Team < ApplicationRecord
     created_at + Time.zone_offset('PST')
   end
 
-  def created_at_formatted
+  def last_created_formatted
     created_at_local.strftime("%B %d %Y at %I:%M %P")
   end
 end
