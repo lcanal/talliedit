@@ -1,49 +1,55 @@
-<div class="overflow-hidden bg-white shadow sm:rounded-md mb-10">
-  <ul role="list" class="divide-y divide-gray-200">
-    <% @pending_memberships.each do |team| %>
-      <% owner = team.owner %>
-      <li>
-      <a href="#" class="block hover:bg-gray-50">
-        <div class="flex items-center px-4 py-4 sm:px-6">
-          <div class="flex min-w-0 flex-1 items-center">
-            <div class="flex-shrink-1 hidden md:block">
-              <%= image_tag owner.gravatar_url, class: "h-12 w-12 rounded-full" %>
-            </div>
-            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-              <div>
-<!--                <p class="truncate text-sm font-medium text-indigo-600">Name</p>-->
-                <p class="mt-2 flex items-center text-sm text-gray-500">
-                  <!-- Heroicon name: mini/envelope -->
-                  <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
-                    <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
-                  </svg>
-                  <span class="truncate"><%= owner.email %></span>
-                </p>
-              </div>
-              <div class="block">
-                <div>
-                  <p class="text-sm text-gray-900">
-                    Invited to <span class="font-bold"><%= team.name %></span>
-                  </p>
-                  <p class="mt-2 flex items-center text-sm text-gray-500">
-                  <span class="inline-flex rounded-full bg-yellow-100 px-2 text-xs font-semibold leading-5 text-yellow-800">
-                    Pending
-                  </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <!-- Heroicon name: mini/chevron-right -->
-            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-            </svg>
-          </div>
+<div class="px-4 sm:px-6 lg:px-8 mb-10">
+  <div class="mt-8 flex flex-col">
+    <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Team</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Role</th>
+              <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                <span class="sr-only">Accept</span>
+              </th>
+              <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                <span class="sr-only">Reject</span>
+              </th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+            <% @pending_memberships.each do |team| %>
+              <% owner = team.owner %>
+              <tr>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                  <div class="flex items-center">
+                    <div class="h-10 w-10 flex-shrink-0">
+                      <%= image_tag owner.gravatar_url, class: "h-10 w-10 rounded-full" %>
+                    </div>
+                    <div class="ml-4">
+<!--                      <div class="font-medium text-gray-900">Name</div>-->
+                      <div class="text-gray-500"><%= owner.email  %></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  <div class="text-gray-900"><%= team.name %></div>
+                  <div class="text-gray-500">Created <%= team.last_created_formatted %></div>
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Member</td>
+                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+
+                  <%= button_to "Accept",accept_invite_team_path(current_user.pending_membership(team).id,12), class: "text-cyan-600 hover:text-cyan-900" %>
+                </td>
+                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                  <a href="#" class="text-red-600 hover:text-red-900">Reject</a>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
         </div>
-      </a>
-    </li>
-    <% end %>
-  </ul>
+      </div>
+    </div>
+  </div>
 </div>

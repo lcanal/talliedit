@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   # GET /teams or /teams.json
   def index
     @teams = current_user.teams
-    @pending_memberships = current_user.pending_memberships
+    @pending_memberships = current_user.pending_teams
   end
 
   # GET /teams/1 or /teams/1.json
@@ -35,6 +35,12 @@ class TeamsController < ApplicationController
     end
   end
 
+  def accept_invite
+    membership = Membership.find(params[:id])
+    membership.role = 'member'
+    membership.save
+    redirect_to teams_path
+  end
   # GET /teams/new
   def new
     @team = Team.new

@@ -31,8 +31,15 @@ class User < ApplicationRecord
     "https://gravatar.com/avatar/#{email_md5}"
   end
 
-  def pending_memberships
+  def pending_teams
     memberships.where(role: 'pending').map(&:team)
   end
 
+  def pending_membership(team)
+    memberships.find_by(team: team, role: 'pending')
+  end
+
+  def active_teams
+    memberships.where(role: ['owner','member']).map(&:team)
+  end
 end
