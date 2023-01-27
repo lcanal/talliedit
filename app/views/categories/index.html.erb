@@ -7,8 +7,11 @@
 </div>
 <% end %>
 
-<div class="overflow-hidden bg-white shadow sm:rounded-md">
+<% @teams.each do |team| %>
+  <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-3"><%= team.name %></h2>
+  <div class="overflow-hidden bg-white shadow sm:rounded-md mb-5">
   <ul role="list" class="divide-y divide-gray-200">
-    <%= render @categories %>
+      <%= render team.categories %>
   </ul>
 </div>
+<% end %>

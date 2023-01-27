@@ -25,6 +25,12 @@
             <%= form.text_area :description, class: "block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm" %>
           </div>
         </div>
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+          <%= form.label :description, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <%= form.collection_select :team_id, current_user.teams, :id, :name, {}, { class: "block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm" } %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

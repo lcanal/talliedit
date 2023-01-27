@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_16_043449) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_22_050120) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +20,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_043449) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.text "description"
+    t.bigint "team_id"
+    t.index ["team_id"], name: "index_categories_on_team_id"
     t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.string "role", default: "member", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_memberships_on_team_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
   create_table "passwordless_sessions", force: :cascade do |t|
@@ -45,12 +57,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_043449) do
     t.index ["category_id"], name: "index_tallies_on_category_id"
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "categories", "teams"
   add_foreign_key "categories", "users"
+  add_foreign_key "memberships", "teams"
+  add_foreign_key "memberships", "users"
   add_foreign_key "tallies", "categories"
 end

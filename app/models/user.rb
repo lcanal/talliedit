@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :categories, :dependent => :destroy
+  has_many :memberships
+  has_many :teams, through: :memberships
 
   validates :email,
             presence: true,
@@ -8,10 +9,20 @@ class User < ApplicationRecord
 
   passwordless_with :email
 
-  # add this so that users can be created!
+  # Add this so that users can be created!
   # don't add this if you want your app to be invite-only
   def self.fetch_resource_for_passwordless(email)
-    find_or_create_by(email:)
+    user = find_or_create_by(email:)
+    if user.teams.count == 0
+      default_team = Team.create!(name: "My Team")
+      Membership.create!(team: default_team, user: user, role: 'owner')
+    end
+    if user.memberships.where(role: 'pending').count > 0
+      user.memberships.where(role: 'pending').each do |membership|
+        membership.update(role: 'member')
+      end
+    end
+    user
   end
 
   def gravatar_url
@@ -20,4 +31,32 @@ class User < ApplicationRecord
     "https://gravatar.com/avatar/#{email_md5}"
   end
 
+  def pending_teams
+    memberships.where(role: 'pending').map(&:team)
+  end
+
+  def pending_membership(team)
+    memberships.find_by(team: team, role: 'pending')
+  end
+
+  def active_teams
+    memberships.where(role: ['owner','member']).map(&:team)
+  end
+
+  def your_teams
+    memberships.where(role: 'owner').map(&:team)
+  end
+
+  def member_teams
+    memberships.where(role: 'member').map(&:team)
+  end
+
+  def determine_membership(team)
+    membership = memberships.where(team: team).first
+    if membership.nil?
+      "none"
+    else
+      membership.role
+    end
+  end
 end
