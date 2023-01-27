@@ -42,4 +42,21 @@ class User < ApplicationRecord
   def active_teams
     memberships.where(role: ['owner','member']).map(&:team)
   end
+
+  def your_teams
+    memberships.where(role: 'owner').map(&:team)
+  end
+
+  def member_teams
+    memberships.where(role: 'member').map(&:team)
+  end
+
+  def determine_membership(team)
+    membership = memberships.where(team: team).first
+    if membership.nil?
+      "none"
+    else
+      membership.role
+    end
+  end
 end

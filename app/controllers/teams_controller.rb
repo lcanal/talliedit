@@ -3,7 +3,8 @@ class TeamsController < ApplicationController
 
   # GET /teams or /teams.json
   def index
-    @teams = current_user.teams
+    @teams = current_user.your_teams
+    @member_teams = current_user.member_teams
     @pending_memberships = current_user.pending_teams
   end
 
@@ -39,6 +40,12 @@ class TeamsController < ApplicationController
     membership = Membership.find(params[:id])
     membership.role = 'member'
     membership.save
+    redirect_to teams_path
+  end
+
+  def reject_invite
+    membership = Membership.find(params[:id])
+    membership.destroy
     redirect_to teams_path
   end
   # GET /teams/new
@@ -81,9 +88,8 @@ class TeamsController < ApplicationController
   # DELETE /teams/1 or /teams/1.json
   def destroy
     @team.destroy
-
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: "Team was successfully destroyed." }
+      format.html { redirect_to teams_url, notice: "Team was successfully deleted." }
       format.json { head :no_content }
     end
   end
