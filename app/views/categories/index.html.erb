@@ -8,10 +8,19 @@
 <% end %>
 
 <% @teams.each do |team| %>
-  <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-3"><%= team.name %></h2>
-  <div class="overflow-hidden bg-white shadow sm:rounded-md mb-5">
-  <ul role="list" class="divide-y divide-gray-200">
-      <%= render team.categories %>
-  </ul>
-</div>
+  <div class="border-b border-gray-200 pb-5 mb-7">
+    <h3 class="flex justify-between align-middle text-lg font-medium leading-6 text-gray-900">
+      <div class="inline-block">
+        <%= image_tag team.owner.gravatar_url, class: "h-12 w-12 rounded-full mr-5 inline"%>
+        <%= team.name %>
+      </div>
+
+    </h3>
+  </div>
+<!--  <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-3"><%#= team.name %></h2>-->
+  <div class="overflow-hidden bg-white shadow sm:rounded-md mb-10">
+    <ul role="list" class="divide-y divide-gray-200">
+        <%= render team.categories %>
+    </ul>
+  </div>
 <% end %>
