@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  resources :teams
   passwordless_for :users , at: '/', as: :auth
   get '/sign_up', :to => "pages#sign_up", :as => :sign_up
 
   resources :categories
   resources :tallies
+  resources :teams
+  resources :memberships
+
   delete '/tallies/:id',  :to => "tallies#destroy", :as => :delete_tally
   # post '/tallies/:id', :to => "tallies#update", :as => :tally
   #

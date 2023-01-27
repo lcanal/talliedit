@@ -2,7 +2,7 @@
   <ul role="list" class="divide-y divide-gray-200">
     <% @team.memberships.each do |membership| %>
     <li>
-      <a href="#" class="block hover:bg-gray-50">
+      <%= link_to membership_path(membership), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this invite?" }, class: "block hover:bg-gray-50" do %>
         <div class="flex items-center px-4 py-4 sm:px-6">
           <div class="flex min-w-0 flex-1 items-center">
             <div class="flex-shrink-0">
@@ -44,7 +44,7 @@
             </svg>
           </div>
         </div>
-      </a>
+      <% end %>
     </li>
   <% end %>
   </ul>
