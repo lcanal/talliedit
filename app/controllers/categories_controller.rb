@@ -90,7 +90,7 @@ class CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = Category.where(id: params[:id], user_id: current_user.id).first
+      @category = Category.where(id: params[:id], team_id: current_user.team_ids).first
     end
 
     # Only allow a list of trusted parameters through.

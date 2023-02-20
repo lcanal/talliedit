@@ -95,6 +95,7 @@ GEM
     erubi (1.12.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    honeybadger (5.1.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
@@ -233,6 +234,7 @@ DEPENDENCIES
   capybara
   debug
   dotenv-rails (~> 2.8)
+  honeybadger (~> 5.0)
   importmap-rails
   jbuilder
   letter_opener
