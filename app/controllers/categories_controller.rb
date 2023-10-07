@@ -22,10 +22,10 @@ class CategoriesController < ApplicationController
     @category.save
 
     respond_to do |format|
-      format.html { redirect_to categories_path, notice: 'Category was successfully archived.' }
+      format.html { redirect_to categories_path, notice: 'Category was successfully archived.', header: 'Successfully Archived' }
       format.json { render :show, status: :ok, location: categories_path }
     end
-    
+
   end
 
   def restore
@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
     @category.save
 
     respond_to do |format|
-      format.html { redirect_to archived_categories_path, notice: 'Category was successfully restored.' }
+      format.html { redirect_to archived_categories_path, notice: 'Category was successfully restored.', header: 'Successfully Restored' }
       format.json { render :show, status: :ok, location: categories_path }
     end
   end
