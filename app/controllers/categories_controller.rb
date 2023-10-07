@@ -11,6 +11,11 @@ class CategoriesController < ApplicationController
   def show
   end
 
+  def archived
+    @teams = current_user.active_teams
+    render :index
+  end
+
   # GET /categories/new
   def new
     @category = Category.new
