@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_22_050120) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_07_002145) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_050120) do
     t.bigint "user_id", null: false
     t.text "description"
     t.bigint "team_id"
+    t.boolean "archived", default: false
     t.index ["team_id"], name: "index_categories_on_team_id"
     t.index ["user_id"], name: "index_categories_on_user_id"
   end

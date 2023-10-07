@@ -19,5 +19,11 @@ Rails.application.routes.draw do
   # get '/teams/:id/invite/:token', :to => 'teams#accept_invite', :as => :accept_invite_team
   post '/teams/:id/invite/:token', :to => 'teams#accept_invite', :as => :accept_invite_team
 
+
+  get '/archived', :to => 'categories#archived', :as => :archived_categories
+  post '/archive/:id', :to => 'categories#archive', :as => :archive_category
+  post '/restore/:id', :to => 'categories#restore', :as => :restore_category
+
+
   root 'pages#home'
 end
