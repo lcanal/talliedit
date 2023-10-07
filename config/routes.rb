@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
 
   get '/archived', :to => 'categories#archived', :as => :archived_categories
+  post '/archive/:id', :to => 'categories#archive', :as => :archive_category
+  post '/restore/:id', :to => 'categories#restore', :as => :restore_category
+
 
   root 'pages#home'
 end

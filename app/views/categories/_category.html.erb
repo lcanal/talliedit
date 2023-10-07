@@ -21,6 +21,7 @@
 
         <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
           <div class="flex space-x-2 justify-between mt-7 lg:mt-0 lg:justify-end">
+            <% unless category.archived? %>
             <div>
               <%= link_to increment_category_path(category), data: { turbo_method: :post }, class: "inline-flex mr-3 items-center rounded-full border border-transparent bg-cyan-600 p-2 text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2" do %>
                 <!-- Heroicon name: mini/plus -->
@@ -35,6 +36,7 @@
                 <% end %>
               <% end %>
             </div>
+            <% end %>
             <%= link_to "Edit", edit_category_path(category), class: "inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 " %>
           </div>
         </div>

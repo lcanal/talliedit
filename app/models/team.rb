@@ -21,4 +21,12 @@ class Team < ApplicationRecord
   def last_created_formatted
     created_at_local.strftime("%B %d %Y at %I:%M %P")
   end
+
+  def active_categories
+    categories.where(archived: false)
+  end
+
+  def archived_categories
+    categories.where(archived: true)
+  end
 end
