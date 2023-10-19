@@ -81,8 +81,9 @@
         <div class="h-0 flex-1 overflow-y-auto pt-5 pb-4">
           <div class="flex flex-shrink-0 items-center px-4">
             <%= image_tag "tally_icon.svg", class: "h-8 w-auto" %>
+            <h2 class="font-bold text-xl text-white ml-5">TalliedIt</h2>
           </div>
-          <nav class="mt-5 space-y-1 px-2">
+          <nav class="mt-5 space-y-1 px-8">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <%= link_to categories_path, class: (request.fullpath.start_with?('/categories') ?  current_menu_class : other_menu_class) do %>
               <!--
@@ -144,14 +145,15 @@
   </div>
 
   <!-- Static sidebar for desktop -->
-  <div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+  <div class="hidden md:fixed md:inset-y-0 md:flex md:w-56 md:flex-col">
     <!-- Sidebar component, swap this element with another sidebar if you like -->
     <div class="flex min-h-0 flex-1 flex-col bg-gray-800">
       <div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
         <div class="flex flex-shrink-0 items-center px-4">
           <%= image_tag "tally_icon.svg", class: "h-8 w-auto" %>
+          <h2 class="font-bold text-xl text-white ml-5">TalliedIt</h2>
         </div>
-        <nav class="mt-5 flex-1 space-y-1 px-2">
+        <nav class="mt-5 flex-1 space-y-1 px-6">
           <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <%= link_to categories_path, class: (request.fullpath.start_with?('/categories') ?  current_menu_class : other_menu_class) do %>
             <!--
@@ -202,7 +204,7 @@
               <%= image_tag current_user.gravatar_url, class: "inline-block h-9 w-9 rounded-full" %>
             </div>
             <div class="ml-3 justify-start">
-              <p class="text-sm font-medium text-white"><%= current_user.email %></p>
+              <p class="text-xs font-medium text-white"><%= current_user.email %></p>
               <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">Logout</p>
             </div>
           </div>
